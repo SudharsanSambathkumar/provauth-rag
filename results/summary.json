@@ -1,0 +1,1004 @@
+{
+  "config": {
+    "top_k": 8,
+    "hops": 3,
+    "depth": 3,
+    "cap": 256,
+    "sentences_per_chunk": 4,
+    "embed_dim": 128,
+    "seed": 0
+  },
+  "oracle": {
+    "depth": 6,
+    "cap": 1024
+  },
+  "environment": {
+    "python": "3.13.16",
+    "platform": "Linux-6.18.44-fc-v185-x86_64-with-glibc2.39",
+    "processor": "Intel(R) Xeon(R) Processor @ 2.10GHz"
+  },
+  "datasets": {
+    "retail": {
+      "stats": {
+        "documents": 88,
+        "evidence": 1039,
+        "entities": 274,
+        "queries": 138,
+        "users": 5,
+        "pairs": 690,
+        "rules": 5,
+        "derived_claims_depth3": 252,
+        "derived_claims_oracle": 252
+      },
+      "overhead": {
+        "index_and_materialize_s": 0.16768151199994463,
+        "materialize_s": 0.012401287999978194,
+        "mean_monomials_per_claim": 2.007936507936508,
+        "max_monomials_per_claim": 12,
+        "truncated_expressions": 0,
+        "inference_rounds": 3
+      },
+      "summary": {
+        "B0": {
+          "name": "No access control",
+          "pairs": 690,
+          "leak_pairs_pct": 35.79710144927536,
+          "leaked_claims": 379,
+          "udr_pct": 100.0,
+          "auth_accuracy_pct": 60.31413612565445,
+          "precision_pct": 60.31413612565445,
+          "recall_pct": 100.0,
+          "f1_pct": 75.2449379490529,
+          "apa_pct": 100.0,
+          "mixed_claims": 98,
+          "latency_mean_ms": 11.884023655070813,
+          "latency_p95_ms": 14.201205999938793
+        },
+        "B1": {
+          "name": "Seed-only ACL",
+          "pairs": 690,
+          "leak_pairs_pct": 35.79710144927536,
+          "leaked_claims": 379,
+          "udr_pct": 100.0,
+          "auth_accuracy_pct": 60.31413612565445,
+          "precision_pct": 60.31413612565445,
+          "recall_pct": 100.0,
+          "f1_pct": 75.2449379490529,
+          "apa_pct": 100.0,
+          "mixed_claims": 98,
+          "latency_mean_ms": 11.947954302900143,
+          "latency_p95_ms": 14.756691999991745
+        },
+        "B2": {
+          "name": "Resource-level ACL",
+          "pairs": 690,
+          "leak_pairs_pct": 10.434782608695652,
+          "leaked_claims": 94,
+          "udr_pct": 24.80211081794195,
+          "auth_accuracy_pct": 90.15706806282722,
+          "precision_pct": 85.97014925373134,
+          "recall_pct": 100.0,
+          "f1_pct": 92.45585874799357,
+          "apa_pct": 100.0,
+          "mixed_claims": 98,
+          "latency_mean_ms": 11.150402795652203,
+          "latency_p95_ms": 13.436653999974624
+        },
+        "B3": {
+          "name": "Single-witness provenance",
+          "pairs": 690,
+          "leak_pairs_pct": 0.0,
+          "leaked_claims": 0,
+          "udr_pct": 0.0,
+          "auth_accuracy_pct": 91.93717277486911,
+          "precision_pct": 100.0,
+          "recall_pct": 86.63194444444444,
+          "f1_pct": 92.83720930232559,
+          "apa_pct": 21.428571428571427,
+          "mixed_claims": 98,
+          "latency_mean_ms": 2.7820946565232894,
+          "latency_p95_ms": 3.3231159999331794
+        },
+        "B4": {
+          "name": "Lineage-based denial",
+          "pairs": 690,
+          "leak_pairs_pct": 0.0,
+          "leaked_claims": 0,
+          "udr_pct": 0.0,
+          "auth_accuracy_pct": 89.73821989528795,
+          "precision_pct": 100.0,
+          "recall_pct": 82.98611111111111,
+          "f1_pct": 90.70208728652752,
+          "apa_pct": 0.0,
+          "mixed_claims": 98,
+          "latency_mean_ms": 2.7034583565233476,
+          "latency_p95_ms": 3.2928649999348636
+        },
+        "P-Q": {
+          "name": "Proposed without claim policy",
+          "pairs": 690,
+          "leak_pairs_pct": 10.434782608695652,
+          "leaked_claims": 94,
+          "udr_pct": 24.80211081794195,
+          "auth_accuracy_pct": 90.15706806282722,
+          "precision_pct": 85.97014925373134,
+          "recall_pct": 100.0,
+          "f1_pct": 92.45585874799357,
+          "apa_pct": 100.0,
+          "mixed_claims": 98,
+          "latency_mean_ms": 2.6724438985515127,
+          "latency_p95_ms": 3.2338720000097965
+        },
+        "P": {
+          "name": "Proposed (provenance + claim policy)",
+          "pairs": 690,
+          "leak_pairs_pct": 0.0,
+          "leaked_claims": 0,
+          "udr_pct": 0.0,
+          "auth_accuracy_pct": 100.0,
+          "precision_pct": 100.0,
+          "recall_pct": 100.0,
+          "f1_pct": 100.0,
+          "apa_pct": 100.0,
+          "mixed_claims": 98,
+          "latency_mean_ms": 2.6555464840630454,
+          "latency_p95_ms": 3.0849470000475776
+        }
+      },
+      "per_user": {
+        "staff": {
+          "B2": {
+            "name": "Resource-level ACL",
+            "pairs": 138,
+            "leak_pairs_pct": 32.608695652173914,
+            "leaked_claims": 56,
+            "udr_pct": 32.748538011695906,
+            "auth_accuracy_pct": 70.68062827225131,
+            "precision_pct": 26.31578947368421,
+            "recall_pct": 100.0,
+            "f1_pct": 41.66666666666667,
+            "apa_pct": 100.0,
+            "mixed_claims": 20,
+            "latency_mean_ms": 10.752340123186032,
+            "latency_p95_ms": 12.941354999952637
+          },
+          "P-Q": {
+            "name": "Proposed without claim policy",
+            "pairs": 138,
+            "leak_pairs_pct": 32.608695652173914,
+            "leaked_claims": 56,
+            "udr_pct": 32.748538011695906,
+            "auth_accuracy_pct": 70.68062827225131,
+            "precision_pct": 26.31578947368421,
+            "recall_pct": 100.0,
+            "f1_pct": 41.66666666666667,
+            "apa_pct": 100.0,
+            "mixed_claims": 20,
+            "latency_mean_ms": 2.6591089999964677,
+            "latency_p95_ms": 3.2338720000097965
+          },
+          "P": {
+            "name": "Proposed (provenance + claim policy)",
+            "pairs": 138,
+            "leak_pairs_pct": 0.0,
+            "leaked_claims": 0,
+            "udr_pct": 0.0,
+            "auth_accuracy_pct": 100.0,
+            "precision_pct": 100.0,
+            "recall_pct": 100.0,
+            "f1_pct": 100.0,
+            "apa_pct": 100.0,
+            "mixed_claims": 20,
+            "latency_mean_ms": 2.637197586963886,
+            "latency_p95_ms": 3.0096570000068823
+          }
+        },
+        "store_manager": {
+          "B2": {
+            "name": "Resource-level ACL",
+            "pairs": 138,
+            "leak_pairs_pct": 9.420289855072463,
+            "leaked_claims": 18,
+            "udr_pct": 30.508474576271187,
+            "auth_accuracy_pct": 90.57591623036649,
+            "precision_pct": 88.0,
+            "recall_pct": 100.0,
+            "f1_pct": 93.61702127659575,
+            "apa_pct": 100.0,
+            "mixed_claims": 14,
+            "latency_mean_ms": 10.678221152171561,
+            "latency_p95_ms": 12.565477000066494
+          },
+          "P-Q": {
+            "name": "Proposed without claim policy",
+            "pairs": 138,
+            "leak_pairs_pct": 9.420289855072463,
+            "leaked_claims": 18,
+            "udr_pct": 30.508474576271187,
+            "auth_accuracy_pct": 90.57591623036649,
+            "precision_pct": 88.0,
+            "recall_pct": 100.0,
+            "f1_pct": 93.61702127659575,
+            "apa_pct": 100.0,
+            "mixed_claims": 14,
+            "latency_mean_ms": 2.6440637971005883,
+            "latency_p95_ms": 3.1449890000203595
+          },
+          "P": {
+            "name": "Proposed (provenance + claim policy)",
+            "pairs": 138,
+            "leak_pairs_pct": 0.0,
+            "leaked_claims": 0,
+            "udr_pct": 0.0,
+            "auth_accuracy_pct": 100.0,
+            "precision_pct": 100.0,
+            "recall_pct": 100.0,
+            "f1_pct": 100.0,
+            "apa_pct": 100.0,
+            "mixed_claims": 14,
+            "latency_mean_ms": 2.633257079705602,
+            "latency_p95_ms": 2.944687999956841
+          }
+        },
+        "qa_analyst": {
+          "B2": {
+            "name": "Resource-level ACL",
+            "pairs": 138,
+            "leak_pairs_pct": 0.0,
+            "leaked_claims": 0,
+            "udr_pct": 0.0,
+            "auth_accuracy_pct": 100.0,
+            "precision_pct": 100.0,
+            "recall_pct": 100.0,
+            "f1_pct": 100.0,
+            "apa_pct": 100.0,
+            "mixed_claims": 14,
+            "latency_mean_ms": 10.53807773913143,
+            "latency_p95_ms": 12.179274000004625
+          },
+          "P-Q": {
+            "name": "Proposed without claim policy",
+            "pairs": 138,
+            "leak_pairs_pct": 0.0,
+            "leaked_claims": 0,
+            "udr_pct": 0.0,
+            "auth_accuracy_pct": 100.0,
+            "precision_pct": 100.0,
+            "recall_pct": 100.0,
+            "f1_pct": 100.0,
+            "apa_pct": 100.0,
+            "mixed_claims": 14,
+            "latency_mean_ms": 2.6453445652162806,
+            "latency_p95_ms": 3.0023489999848607
+          },
+          "P": {
+            "name": "Proposed (provenance + claim policy)",
+            "pairs": 138,
+            "leak_pairs_pct": 0.0,
+            "leaked_claims": 0,
+            "udr_pct": 0.0,
+            "auth_accuracy_pct": 100.0,
+            "precision_pct": 100.0,
+            "recall_pct": 100.0,
+            "f1_pct": 100.0,
+            "apa_pct": 100.0,
+            "mixed_claims": 14,
+            "latency_mean_ms": 2.6382901666777245,
+            "latency_p95_ms": 2.9439209999964078
+          }
+        },
+        "procurement": {
+          "B2": {
+            "name": "Resource-level ACL",
+            "pairs": 138,
+            "leak_pairs_pct": 10.144927536231885,
+            "leaked_claims": 20,
+            "udr_pct": 15.873015873015873,
+            "auth_accuracy_pct": 89.52879581151832,
+            "precision_pct": 76.47058823529412,
+            "recall_pct": 100.0,
+            "f1_pct": 86.66666666666666,
+            "apa_pct": 100.0,
+            "mixed_claims": 50,
+            "latency_mean_ms": 10.750821666671316,
+            "latency_p95_ms": 12.202856000044449
+          },
+          "P-Q": {
+            "name": "Proposed without claim policy",
+            "pairs": 138,
+            "leak_pairs_pct": 10.144927536231885,
+            "leaked_claims": 20,
+            "udr_pct": 15.873015873015873,
+            "auth_accuracy_pct": 89.52879581151832,
+            "precision_pct": 76.47058823529412,
+            "recall_pct": 100.0,
+            "f1_pct": 86.66666666666666,
+            "apa_pct": 100.0,
+            "mixed_claims": 50,
+            "latency_mean_ms": 2.675894086964319,
+            "latency_p95_ms": 3.276745999983177
+          },
+          "P": {
+            "name": "Proposed (provenance + claim policy)",
+            "pairs": 138,
+            "leak_pairs_pct": 0.0,
+            "leaked_claims": 0,
+            "udr_pct": 0.0,
+            "auth_accuracy_pct": 100.0,
+            "precision_pct": 100.0,
+            "recall_pct": 100.0,
+            "f1_pct": 100.0,
+            "apa_pct": 100.0,
+            "mixed_claims": 50,
+            "latency_mean_ms": 2.675407246382635,
+            "latency_p95_ms": 3.0849470000475776
+          }
+        },
+        "executive": {
+          "B2": {
+            "name": "Resource-level ACL",
+            "pairs": 138,
+            "leak_pairs_pct": 0.0,
+            "leaked_claims": 0,
+            "udr_pct": 0.0,
+            "auth_accuracy_pct": 100.0,
+            "precision_pct": 100.0,
+            "recall_pct": 100.0,
+            "f1_pct": 100.0,
+            "apa_pct": null,
+            "mixed_claims": 0,
+            "latency_mean_ms": 13.03255329710068,
+            "latency_p95_ms": 15.99031599994305
+          },
+          "P-Q": {
+            "name": "Proposed without claim policy",
+            "pairs": 138,
+            "leak_pairs_pct": 0.0,
+            "leaked_claims": 0,
+            "udr_pct": 0.0,
+            "auth_accuracy_pct": 100.0,
+            "precision_pct": 100.0,
+            "recall_pct": 100.0,
+            "f1_pct": 100.0,
+            "apa_pct": null,
+            "mixed_claims": 0,
+            "latency_mean_ms": 2.7378080434799075,
+            "latency_p95_ms": 3.3420719998957793
+          },
+          "P": {
+            "name": "Proposed (provenance + claim policy)",
+            "pairs": 138,
+            "leak_pairs_pct": 0.0,
+            "leaked_claims": 0,
+            "udr_pct": 0.0,
+            "auth_accuracy_pct": 100.0,
+            "precision_pct": 100.0,
+            "recall_pct": 100.0,
+            "f1_pct": 100.0,
+            "apa_pct": null,
+            "mixed_claims": 0,
+            "latency_mean_ms": 2.69358034058538,
+            "latency_p95_ms": 3.3493999999336665
+          }
+        }
+      },
+      "noninterference": {
+        "overall_pct": {
+          "B0": 63.617149758454104,
+          "B1": 63.617149758454104,
+          "B2": 100.0,
+          "B3": 95.1086956521739,
+          "B4": 94.987922705314,
+          "P-Q": 100.0,
+          "P": 100.0
+        },
+        "by_mutation_pct": {
+          "delete": {
+            "B0": 76.53985507246377,
+            "B1": 76.53985507246377,
+            "B2": 100.0,
+            "B3": 94.20289855072464,
+            "B4": 93.75,
+            "P-Q": 100.0,
+            "P": 100.0
+          },
+          "insert": {
+            "B0": 54.891304347826086,
+            "B1": 54.891304347826086,
+            "B2": 100.0,
+            "B3": 96.64855072463769,
+            "B4": 97.28260869565217,
+            "P-Q": 100.0,
+            "P": 100.0
+          },
+          "rewire": {
+            "B0": 59.42028985507246,
+            "B1": 59.42028985507246,
+            "B2": 100.0,
+            "B3": 94.47463768115942,
+            "B4": 93.93115942028986,
+            "P-Q": 100.0,
+            "P": 100.0
+          }
+        },
+        "trials_per_method": 3312,
+        "users": [
+          "staff",
+          "store_manager",
+          "qa_analyst",
+          "procurement"
+        ]
+      },
+      "depth_ablation": [
+        {
+          "depth": 1,
+          "recall_pct": 50.520833333333336,
+          "udr_pct": 0.0,
+          "f1_pct": 67.1280276816609,
+          "materialize_s": 0.002608587999930023,
+          "latency_mean_ms": 2.6631007869631818
+        },
+        {
+          "depth": 2,
+          "recall_pct": 100.0,
+          "udr_pct": 0.0,
+          "f1_pct": 100.0,
+          "materialize_s": 0.006126705000042421,
+          "latency_mean_ms": 2.9065993072459024
+        },
+        {
+          "depth": 3,
+          "recall_pct": 100.0,
+          "udr_pct": 0.0,
+          "f1_pct": 100.0,
+          "materialize_s": 0.006957792999855883,
+          "latency_mean_ms": 2.514576855072965
+        },
+        {
+          "depth": 4,
+          "recall_pct": 100.0,
+          "udr_pct": 0.0,
+          "f1_pct": 100.0,
+          "materialize_s": 0.007128645999955552,
+          "latency_mean_ms": 2.4623562405820296
+        },
+        {
+          "depth": 6,
+          "recall_pct": 100.0,
+          "udr_pct": 0.0,
+          "f1_pct": 100.0,
+          "materialize_s": 0.008521945999973468,
+          "latency_mean_ms": 2.606150730431854
+        }
+      ],
+      "topk_ablation": [
+        {
+          "top_k": 1,
+          "P_recall_pct": 100.0,
+          "B2_recall_pct": 100.0,
+          "P_udr_pct": 0.0,
+          "B2_udr_pct": 24.80211081794195
+        },
+        {
+          "top_k": 2,
+          "P_recall_pct": 100.0,
+          "B2_recall_pct": 100.0,
+          "P_udr_pct": 0.0,
+          "B2_udr_pct": 24.80211081794195
+        },
+        {
+          "top_k": 4,
+          "P_recall_pct": 100.0,
+          "B2_recall_pct": 100.0,
+          "P_udr_pct": 0.0,
+          "B2_udr_pct": 24.80211081794195
+        },
+        {
+          "top_k": 8,
+          "P_recall_pct": 100.0,
+          "B2_recall_pct": 100.0,
+          "P_udr_pct": 0.0,
+          "B2_udr_pct": 24.80211081794195
+        },
+        {
+          "top_k": 16,
+          "P_recall_pct": 100.0,
+          "B2_recall_pct": 100.0,
+          "P_udr_pct": 0.0,
+          "B2_udr_pct": 24.80211081794195
+        }
+      ]
+    },
+    "itsm": {
+      "stats": {
+        "documents": 70,
+        "evidence": 642,
+        "entities": 462,
+        "queries": 117,
+        "users": 5,
+        "pairs": 585,
+        "rules": 6,
+        "derived_claims_depth3": 882,
+        "derived_claims_oracle": 893
+      },
+      "overhead": {
+        "index_and_materialize_s": 0.1149750470001436,
+        "materialize_s": 0.02466719699987152,
+        "mean_monomials_per_claim": 2.3356009070294785,
+        "max_monomials_per_claim": 16,
+        "truncated_expressions": 0,
+        "inference_rounds": 3
+      },
+      "summary": {
+        "B0": {
+          "name": "No access control",
+          "pairs": 585,
+          "leak_pairs_pct": 40.85470085470085,
+          "leaked_claims": 2247,
+          "udr_pct": 98.50942569048662,
+          "auth_accuracy_pct": 49.20492721164614,
+          "precision_pct": 49.047619047619044,
+          "recall_pct": 99.03846153846155,
+          "f1_pct": 65.60509554140127,
+          "apa_pct": 98.61751152073732,
+          "mixed_claims": 217,
+          "latency_mean_ms": 28.831612034195846,
+          "latency_p95_ms": 38.98924499981149
+        },
+        "B1": {
+          "name": "Seed-only ACL",
+          "pairs": 585,
+          "leak_pairs_pct": 40.85470085470085,
+          "leaked_claims": 2247,
+          "udr_pct": 98.50942569048662,
+          "auth_accuracy_pct": 49.20492721164614,
+          "precision_pct": 49.047619047619044,
+          "recall_pct": 99.03846153846155,
+          "f1_pct": 65.60509554140127,
+          "apa_pct": 98.61751152073732,
+          "mixed_claims": 217,
+          "latency_mean_ms": 27.926786377773745,
+          "latency_p95_ms": 34.712009999793736
+        },
+        "B2": {
+          "name": "Resource-level ACL",
+          "pairs": 585,
+          "leak_pairs_pct": 1.5384615384615385,
+          "leaked_claims": 156,
+          "udr_pct": 6.839105655414292,
+          "auth_accuracy_pct": 95.72228443449048,
+          "precision_pct": 93.23210412147506,
+          "recall_pct": 98.3974358974359,
+          "f1_pct": 95.74515482290042,
+          "apa_pct": 92.16589861751152,
+          "mixed_claims": 217,
+          "latency_mean_ms": 17.163006786322356,
+          "latency_p95_ms": 33.28452200003085
+        },
+        "B3": {
+          "name": "Single-witness provenance",
+          "pairs": 585,
+          "leak_pairs_pct": 0.0,
+          "leaked_claims": 0,
+          "udr_pct": 0.0,
+          "auth_accuracy_pct": 97.3572228443449,
+          "precision_pct": 100.0,
+          "recall_pct": 94.59706959706959,
+          "f1_pct": 97.2235294117647,
+          "apa_pct": 53.91705069124424,
+          "mixed_claims": 217,
+          "latency_mean_ms": 2.538408695722748,
+          "latency_p95_ms": 3.287074000127177
+        },
+        "B4": {
+          "name": "Lineage-based denial",
+          "pairs": 585,
+          "leak_pairs_pct": 0.0,
+          "leaked_claims": 0,
+          "udr_pct": 0.0,
+          "auth_accuracy_pct": 94.78163493840985,
+          "precision_pct": 100.0,
+          "recall_pct": 89.33150183150184,
+          "f1_pct": 94.36517533252722,
+          "apa_pct": 0.9216589861751152,
+          "mixed_claims": 217,
+          "latency_mean_ms": 2.397201529914353,
+          "latency_p95_ms": 3.1665980000070704
+        },
+        "P-Q": {
+          "name": "Proposed without claim policy",
+          "pairs": 585,
+          "leak_pairs_pct": 1.5384615384615385,
+          "leaked_claims": 156,
+          "udr_pct": 6.839105655414292,
+          "auth_accuracy_pct": 95.72228443449048,
+          "precision_pct": 93.23210412147506,
+          "recall_pct": 98.3974358974359,
+          "f1_pct": 95.74515482290042,
+          "apa_pct": 92.16589861751152,
+          "mixed_claims": 217,
+          "latency_mean_ms": 2.3418500444436217,
+          "latency_p95_ms": 3.07533299996976
+        },
+        "P": {
+          "name": "Proposed (provenance + claim policy)",
+          "pairs": 585,
+          "leak_pairs_pct": 0.0,
+          "leaked_claims": 0,
+          "udr_pct": 0.0,
+          "auth_accuracy_pct": 99.21612541993281,
+          "precision_pct": 100.0,
+          "recall_pct": 98.3974358974359,
+          "f1_pct": 99.19224555735056,
+          "apa_pct": 92.16589861751152,
+          "mixed_claims": 217,
+          "latency_mean_ms": 2.323676280342951,
+          "latency_p95_ms": 3.0653129999791418
+        }
+      },
+      "per_user": {
+        "employee": {
+          "B2": {
+            "name": "Resource-level ACL",
+            "pairs": 117,
+            "leak_pairs_pct": 0.0,
+            "leaked_claims": 0,
+            "udr_pct": 0.0,
+            "auth_accuracy_pct": 100.0,
+            "precision_pct": 100.0,
+            "recall_pct": 100.0,
+            "f1_pct": 100.0,
+            "apa_pct": null,
+            "mixed_claims": 0,
+            "latency_mean_ms": 5.549898034198713,
+            "latency_p95_ms": 7.951490999857924
+          },
+          "P-Q": {
+            "name": "Proposed without claim policy",
+            "pairs": 117,
+            "leak_pairs_pct": 0.0,
+            "leaked_claims": 0,
+            "udr_pct": 0.0,
+            "auth_accuracy_pct": 100.0,
+            "precision_pct": 100.0,
+            "recall_pct": 100.0,
+            "f1_pct": 100.0,
+            "apa_pct": null,
+            "mixed_claims": 0,
+            "latency_mean_ms": 2.209303170943752,
+            "latency_p95_ms": 3.036021999832883
+          },
+          "P": {
+            "name": "Proposed (provenance + claim policy)",
+            "pairs": 117,
+            "leak_pairs_pct": 0.0,
+            "leaked_claims": 0,
+            "udr_pct": 0.0,
+            "auth_accuracy_pct": 100.0,
+            "precision_pct": 100.0,
+            "recall_pct": 100.0,
+            "f1_pct": 100.0,
+            "apa_pct": null,
+            "mixed_claims": 0,
+            "latency_mean_ms": 2.149988786326363,
+            "latency_p95_ms": 2.819933999944624
+          }
+        },
+        "service_desk": {
+          "B2": {
+            "name": "Resource-level ACL",
+            "pairs": 117,
+            "leak_pairs_pct": 0.0,
+            "leaked_claims": 0,
+            "udr_pct": 0.0,
+            "auth_accuracy_pct": 100.0,
+            "precision_pct": 100.0,
+            "recall_pct": 100.0,
+            "f1_pct": 100.0,
+            "apa_pct": null,
+            "mixed_claims": 0,
+            "latency_mean_ms": 10.817743435900878,
+            "latency_p95_ms": 53.395672000078775
+          },
+          "P-Q": {
+            "name": "Proposed without claim policy",
+            "pairs": 117,
+            "leak_pairs_pct": 0.0,
+            "leaked_claims": 0,
+            "udr_pct": 0.0,
+            "auth_accuracy_pct": 100.0,
+            "precision_pct": 100.0,
+            "recall_pct": 100.0,
+            "f1_pct": 100.0,
+            "apa_pct": null,
+            "mixed_claims": 0,
+            "latency_mean_ms": 2.289823675216453,
+            "latency_p95_ms": 2.7905429999464104
+          },
+          "P": {
+            "name": "Proposed (provenance + claim policy)",
+            "pairs": 117,
+            "leak_pairs_pct": 0.0,
+            "leaked_claims": 0,
+            "udr_pct": 0.0,
+            "auth_accuracy_pct": 100.0,
+            "precision_pct": 100.0,
+            "recall_pct": 100.0,
+            "f1_pct": 100.0,
+            "apa_pct": null,
+            "mixed_claims": 0,
+            "latency_mean_ms": 2.3232262307622937,
+            "latency_p95_ms": 2.922040000157722
+          }
+        },
+        "sre": {
+          "B2": {
+            "name": "Resource-level ACL",
+            "pairs": 117,
+            "leak_pairs_pct": 7.6923076923076925,
+            "leaked_claims": 156,
+            "udr_pct": 72.22222222222223,
+            "auth_accuracy_pct": 82.19484882418813,
+            "precision_pct": 81.20481927710843,
+            "recall_pct": 99.55686853766618,
+            "f1_pct": 89.44923689449237,
+            "apa_pct": 98.75,
+            "mixed_claims": 80,
+            "latency_mean_ms": 29.28172982050121,
+            "latency_p95_ms": 75.11139300004288
+          },
+          "P-Q": {
+            "name": "Proposed without claim policy",
+            "pairs": 117,
+            "leak_pairs_pct": 7.6923076923076925,
+            "leaked_claims": 156,
+            "udr_pct": 72.22222222222223,
+            "auth_accuracy_pct": 82.19484882418813,
+            "precision_pct": 81.20481927710843,
+            "recall_pct": 99.55686853766618,
+            "f1_pct": 89.44923689449237,
+            "apa_pct": 98.75,
+            "mixed_claims": 80,
+            "latency_mean_ms": 2.4358537606741058,
+            "latency_p95_ms": 3.077482999970016
+          },
+          "P": {
+            "name": "Proposed (provenance + claim policy)",
+            "pairs": 117,
+            "leak_pairs_pct": 0.0,
+            "leaked_claims": 0,
+            "udr_pct": 0.0,
+            "auth_accuracy_pct": 99.66405375139978,
+            "precision_pct": 100.0,
+            "recall_pct": 99.55686853766618,
+            "f1_pct": 99.77794226498891,
+            "apa_pct": 98.75,
+            "mixed_claims": 80,
+            "latency_mean_ms": 2.443790658123603,
+            "latency_p95_ms": 3.123434000144698
+          }
+        },
+        "security_analyst": {
+          "B2": {
+            "name": "Resource-level ACL",
+            "pairs": 117,
+            "leak_pairs_pct": 0.0,
+            "leaked_claims": 0,
+            "udr_pct": 0.0,
+            "auth_accuracy_pct": 97.64837625979843,
+            "precision_pct": 100.0,
+            "recall_pct": 92.85714285714286,
+            "f1_pct": 96.2962962962963,
+            "apa_pct": 88.32116788321167,
+            "mixed_claims": 137,
+            "latency_mean_ms": 11.867974495717291,
+            "latency_p95_ms": 15.168857999924512
+          },
+          "P-Q": {
+            "name": "Proposed without claim policy",
+            "pairs": 117,
+            "leak_pairs_pct": 0.0,
+            "leaked_claims": 0,
+            "udr_pct": 0.0,
+            "auth_accuracy_pct": 97.64837625979843,
+            "precision_pct": 100.0,
+            "recall_pct": 92.85714285714286,
+            "f1_pct": 96.2962962962963,
+            "apa_pct": 88.32116788321167,
+            "mixed_claims": 137,
+            "latency_mean_ms": 2.26870160684632,
+            "latency_p95_ms": 2.9564009998921392
+          },
+          "P": {
+            "name": "Proposed (provenance + claim policy)",
+            "pairs": 117,
+            "leak_pairs_pct": 0.0,
+            "leaked_claims": 0,
+            "udr_pct": 0.0,
+            "auth_accuracy_pct": 97.64837625979843,
+            "precision_pct": 100.0,
+            "recall_pct": 92.85714285714286,
+            "f1_pct": 96.2962962962963,
+            "apa_pct": 88.32116788321167,
+            "mixed_claims": 137,
+            "latency_mean_ms": 2.243517974377929,
+            "latency_p95_ms": 2.5410389998796745
+          }
+        },
+        "executive": {
+          "B2": {
+            "name": "Resource-level ACL",
+            "pairs": 117,
+            "leak_pairs_pct": 0.0,
+            "leaked_claims": 0,
+            "udr_pct": 0.0,
+            "auth_accuracy_pct": 98.76819708846584,
+            "precision_pct": 100.0,
+            "recall_pct": 98.76819708846585,
+            "f1_pct": 99.38028169014085,
+            "apa_pct": null,
+            "mixed_claims": 0,
+            "latency_mean_ms": 28.297688145293694,
+            "latency_p95_ms": 34.1412620000483
+          },
+          "P-Q": {
+            "name": "Proposed without claim policy",
+            "pairs": 117,
+            "leak_pairs_pct": 0.0,
+            "leaked_claims": 0,
+            "udr_pct": 0.0,
+            "auth_accuracy_pct": 98.76819708846584,
+            "precision_pct": 100.0,
+            "recall_pct": 98.76819708846585,
+            "f1_pct": 99.38028169014085,
+            "apa_pct": null,
+            "mixed_claims": 0,
+            "latency_mean_ms": 2.5055680085374776,
+            "latency_p95_ms": 3.414952999946763
+          },
+          "P": {
+            "name": "Proposed (provenance + claim policy)",
+            "pairs": 117,
+            "leak_pairs_pct": 0.0,
+            "leaked_claims": 0,
+            "udr_pct": 0.0,
+            "auth_accuracy_pct": 98.76819708846584,
+            "precision_pct": 100.0,
+            "recall_pct": 98.76819708846585,
+            "f1_pct": 99.38028169014085,
+            "apa_pct": null,
+            "mixed_claims": 0,
+            "latency_mean_ms": 2.457857752124566,
+            "latency_p95_ms": 3.1013190000521718
+          }
+        }
+      },
+      "noninterference": {
+        "overall_pct": {
+          "B0": 60.50569800569801,
+          "B1": 60.50569800569801,
+          "B2": 100.0,
+          "B3": 93.66096866096866,
+          "B4": 92.80626780626781,
+          "P-Q": 100.0,
+          "P": 100.0
+        },
+        "by_mutation_pct": {
+          "delete": {
+            "B0": 57.69230769230769,
+            "B1": 57.69230769230769,
+            "B2": 100.0,
+            "B3": 94.55128205128206,
+            "B4": 90.8119658119658,
+            "P-Q": 100.0,
+            "P": 100.0
+          },
+          "insert": {
+            "B0": 71.04700854700855,
+            "B1": 71.04700854700855,
+            "B2": 100.0,
+            "B3": 93.80341880341881,
+            "B4": 95.83333333333333,
+            "P-Q": 100.0,
+            "P": 100.0
+          },
+          "rewire": {
+            "B0": 52.77777777777778,
+            "B1": 52.77777777777778,
+            "B2": 100.0,
+            "B3": 92.62820512820512,
+            "B4": 91.77350427350427,
+            "P-Q": 100.0,
+            "P": 100.0
+          }
+        },
+        "trials_per_method": 2808,
+        "users": [
+          "employee",
+          "service_desk",
+          "sre",
+          "security_analyst"
+        ]
+      },
+      "depth_ablation": [
+        {
+          "depth": 1,
+          "recall_pct": 61.53846153846154,
+          "udr_pct": 0.0,
+          "f1_pct": 76.1904761904762,
+          "materialize_s": 0.005337271000144028,
+          "latency_mean_ms": 2.016662586331424
+        },
+        {
+          "depth": 2,
+          "recall_pct": 87.27106227106228,
+          "udr_pct": 0.0,
+          "f1_pct": 93.20293398533008,
+          "materialize_s": 0.012156400000094436,
+          "latency_mean_ms": 2.0414323675218355
+        },
+        {
+          "depth": 3,
+          "recall_pct": 98.3974358974359,
+          "udr_pct": 0.0,
+          "f1_pct": 99.19224555735056,
+          "materialize_s": 0.02293162800015125,
+          "latency_mean_ms": 2.1575443008547373
+        },
+        {
+          "depth": 4,
+          "recall_pct": 99.95421245421245,
+          "udr_pct": 0.0,
+          "f1_pct": 99.97710098465767,
+          "materialize_s": 0.03041812900005425,
+          "latency_mean_ms": 2.1906144529904665
+        },
+        {
+          "depth": 6,
+          "recall_pct": 100.0,
+          "udr_pct": 0.0,
+          "f1_pct": 100.0,
+          "materialize_s": 0.03765945999998621,
+          "latency_mean_ms": 2.1669794649579464
+        }
+      ],
+      "topk_ablation": [
+        {
+          "top_k": 1,
+          "P_recall_pct": 98.3974358974359,
+          "B2_recall_pct": 89.60622710622711,
+          "P_udr_pct": 0.0,
+          "B2_udr_pct": 5.830775975449364
+        },
+        {
+          "top_k": 2,
+          "P_recall_pct": 98.3974358974359,
+          "B2_recall_pct": 95.6043956043956,
+          "P_udr_pct": 0.0,
+          "B2_udr_pct": 6.707584392810171
+        },
+        {
+          "top_k": 4,
+          "P_recall_pct": 98.3974358974359,
+          "B2_recall_pct": 98.21428571428571,
+          "P_udr_pct": 0.0,
+          "B2_udr_pct": 6.839105655414292
+        },
+        {
+          "top_k": 8,
+          "P_recall_pct": 98.3974358974359,
+          "B2_recall_pct": 98.3974358974359,
+          "P_udr_pct": 0.0,
+          "B2_udr_pct": 6.839105655414292
+        },
+        {
+          "top_k": 16,
+          "P_recall_pct": 98.3974358974359,
+          "B2_recall_pct": 98.3974358974359,
+          "P_udr_pct": 0.0,
+          "B2_udr_pct": 6.839105655414292
+        }
+      ]
+    }
+  }
+}
